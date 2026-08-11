@@ -1,0 +1,38 @@
+      <div class="la-quiz-section">
+        <h3 class="la-section-title">
+          <span class="la-section-title-text">Quiz/Test-Vergleich</span>
+          <span
+            class="la-info-icon"
+            tabindex="0"
+            aria-label="Information zum Quiz/Test-Vergleich">
+            <span class="la-info-tooltip">
+              Der Quiz/Test-Vergleich zeigt dein Ergebnis im Vergleich zum Durchschnitt aller
+              Studierenden in demselben Quiz.
+          </span>
+        </h3>
+
+        <div class="la-quiz-controls">
+          <label for="la-quiz-select">Quiz auswählen:</label>
+          <select id="la-quiz-select" class="la-quiz-select">
+            {{#selected_course_quizzes}}
+            <option value="{{id}}">{{name}}</option>
+            {{/selected_course_quizzes}}
+          </select>
+        </div>
+
+        <div class="la-quiz-chart" id="la-quiz-chart">
+          <canvas id="la-quiz-chart-canvas" style="height: 180px;"></canvas>
+
+          <div class="la-quiz-values">
+            <div class="la-quiz-value-item user">
+              <div class="la-quiz-value-label">Dein Ergebnis</div>
+              <div id="la-quiz-value-user" class="la-quiz-value-score">-</div>
+            </div>
+            <div class="la-quiz-value-item avg">
+              <div class="la-quiz-value-label">Durchschnitt</div>
+              <div id="la-quiz-value-avg" class="la-quiz-value-score">-</div>
+            </div>
+          </div>
+          <div id="la-quiz-empty" class="la-quiz-empty" aria-live="polite"></div>
+        </div>
+      </div>

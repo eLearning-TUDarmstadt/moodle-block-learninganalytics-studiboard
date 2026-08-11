@@ -1,0 +1,71 @@
+      <h2 class="la-todo-main-title">To-Do Liste</h2>
+
+      <!-- Wichtig & Fristen -->
+      <div class="la-todo-box la-todo-box-important">
+        <h3>Wichtig & Fristen</h3>
+
+        <ul class="la-todo-list">
+          {{#important_todos}}
+            <li class="la-todo-item-wrapper {{#completed}}la-todo-completed{{/completed}} {{#overdue}}la-todo-overdue{{/overdue}}">
+              <a
+                href="{{url}}"
+                class="la-todo-item"
+                data-courseid="{{courseid}}"
+                data-moduleid="{{moduleid}}"
+                data-modname="{{modname}}">
+
+                <span class="la-todo-icon">{{icon}}</span>
+
+                <span class="la-todo-content">
+                  <strong class="la-todo-name">{{name}}</strong>
+                  <small class="la-todo-meta">
+                    {{course}}{{#duedate}} – {{duedate}}{{/duedate}}
+                  </small>
+                </span>
+
+                {{#completed}}
+                  <span class="la-todo-checkmark">✓</span>
+                {{/completed}}
+              </a>
+            </li>
+          {{/important_todos}}
+
+          {{^important_todos}}
+            <li class="la-todo-empty">🎉 Keine offenen Aufgaben</li>
+          {{/important_todos}}
+        </ul>
+      </div>
+
+      <!-- Material & Austausch -->
+      <div class="la-todo-box la-todo-box-material">
+        <h3>Material & Austausch</h3>
+
+        <ul class="la-todo-list">
+          {{#material_todos}}
+            <li class="la-todo-item-wrapper {{#completed}}la-todo-completed{{/completed}}">
+              <a
+                href="{{url}}"
+                class="la-todo-item"
+                data-courseid="{{courseid}}"
+                data-moduleid="{{moduleid}}"
+                data-modname="{{modname}}">
+
+                <span class="la-todo-icon">{{icon}}</span>
+
+                <span class="la-todo-content">
+                  <strong class="la-todo-name">{{name}}</strong>
+                  <small class="la-todo-meta">{{course}}</small>
+                </span>
+
+                {{#completed}}
+                  <span class="la-todo-checkmark">✓</span>
+                {{/completed}}
+              </a>
+            </li>
+          {{/material_todos}}
+
+          {{^material_todos}}
+            <li class="la-todo-empty">📚 Keine Materialien</li>
+          {{/material_todos}}
+        </ul>
+      </div>

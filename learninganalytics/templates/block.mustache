@@ -1,0 +1,145 @@
+<div class="la-container">
+
+  <!-- TOP ROW: Kursübersicht + Allgemeiner Fortschritt -->
+  <div class="la-toprow">
+
+    <!-- Kursübersicht -->
+    <div class="la-coursebox">
+      <div class="la-coursebox-title">Kursübersicht</div>
+
+      <div class="la-coursebar" aria-label="Kursübersicht">
+        {{#courses}}
+          <div
+            class="la-course-card {{#is_selected}}la-course-card--selected{{/is_selected}}"
+            data-courseid="{{id}}"
+            data-coursename="{{fullname}}"
+            data-progress="{{progress}}">
+
+            <div class="la-course-title" title="{{fullname}}">
+              {{fullname}}
+            </div>
+
+            <div class="la-progress-wrapper">
+              <div
+                class="la-progress-bar"
+                style="width: {{progress}}%;">
+              </div>
+            </div>
+
+            <div class="la-progress-label">
+              {{progress}}%
+            </div>
+          </div>
+        {{/courses}}
+      </div>
+    </div>
+
+    <!-- Allgemeiner Fortschritt -->
+    <div class="la-overall-box">
+      <div class="la-overall-title">Allgemeiner Fortschritt</div>
+      <div class="la-overall-emoji">{{overall_emoji}}</div>
+      <div class="la-overall-number">{{overall_progress}}%</div>
+    </div>
+
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="la-main-grid">
+
+    <!-- LINKER BEREICH -->
+    <div class="la-main-left">
+
+      <div class="la-selected-course-heading" id="la-selected-course-heading">
+        {{#selected_course.fullname}}
+          <span class="la-selected-course-label">Aktueller Kurs:</span>
+          <span class="la-selected-course-name">{{selected_course.fullname}}</span>
+        {{/selected_course.fullname}}
+        {{^selected_course.fullname}}
+          Kein Kurs ausgewählt
+        {{/selected_course.fullname}}
+      </div>
+
+      <h3 class="la-section-title">
+        <span class="la-section-title-text">Kurs Fortschritt</span>
+        <span
+          class="la-info-icon"
+          tabindex="0"
+          aria-label="Information zum Kursfortschritt">
+          <span class="la-info-tooltip">
+            Der Kursfortschritt zeigt, wie viele der im Kurs vorhandenen Aktivitäten bereits
+            abgeschlossen wurden. Er basiert auf den in Moodle definierten Aktivitätsabschlüssen.
+            Aktivitäten aus dem Bereich "Wichtig & Fristen" werden höher gewichtet als Aktivitäten
+            aus dem Bereich "Material & Austausch".
+          </span>
+        </span>
+      </h3>
+
+      <div class="la-big-progress">
+        <div
+          class="la-big-progress-fill"
+          id="la-selected-progress-bar"
+          style="width: {{selected_course.progress}}%;">
+        </div>
+      </div>
+
+      <div class="la-selected-progress-label" id="la-selected-progress-label">
+        <span id="la-selected-progress-emoji">{{selected_course.emoji}}</span>
+        <span>{{selected_course.progress}}%</span>
+      </div>
+
+      <h3 class="la-section-title">
+        <span class="la-section-title-text">Peer Vergleich</span>
+        <span
+          class="la-info-icon"
+          tabindex="0"
+          aria-label="Information zum Peer-Vergleich">
+          <span class="la-info-tooltip">
+            Der Peer-Vergleich zeigt, wie dein Kursfortschritt im Vergleich zum durchschnittlichen
+            Fortschritt anderer Studierender im selben Kurs steht. Der Peer-Score
+            sagt hierbei aus, dass verschiedene Aktionen unterschiedlich gewichtet werden (Abgaben=5,
+            Inhalt erstellt = 3, Inhalt bearbeitet = 2, Inhalt aufgerufen = 1). Daraus wird ein
+            individueller Score berechnet und mit Scores anderer Studierenden verglichen. 
+            N ist die Anzahl der Studierenden, die in dem Kurs eingeschrieben sind und im Bewertungszeitraum aktiv im Kurs waren.
+          </span>
+        </span>
+      </h3>
+
+      <!-- Peer Vergleich: initial neutral, wird von JS aktualisiert -->
+      <div class="la-big-progress">
+        <div
+          class="la-big-progress-fill"
+          id="la-peer-progress-bar"
+          style="width: 0%;">
+        </div>
+      </div>
+
+      <div class="la-selected-progress-label" id="la-peer-progress-label">
+        –
+      </div>
+
+      {{> block_learninganalytics/quiz_chart}}
+
+    </div>
+
+    <!-- RECHTER BEREICH -->
+    <div class="la-main-right">
+
+      {{> block_learninganalytics/todo_list}}
+
+    </div>
+
+  </div>
+
+  <!-- Kursdetails für JS (JSON, nicht escaped!) -->
+  <script type="application/json" id="la-course-details">{{{course_details_json}}}</script>
+
+  {{#js}}
+  require(['block_learninganalytics/dashboard'], function(dashboard) {
+      dashboard.init();
+  });
+  require(['block_learninganalytics/quiz_chart'], function(chart) {
+      chart.init('{{{course_details_json}}}', {{current_course_id}});
+  });
+  {{/js}}
+
+</div>
