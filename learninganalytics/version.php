@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_learninganalytics';
-$plugin->version   = 2026010510;
+$plugin->version   = 2026081202;
 $plugin->requires  = 2024042200;   // Moodle 4.5.
 $plugin->maturity  = MATURITY_ALPHA;
 $plugin->release   = '0.1';
