@@ -124,7 +124,10 @@ class analytics_service {
             'selected_course' => $selectedcourse,
             'important_todos' => $importanttodos,
             'material_todos' => $materialtodos,
-            'course_details_json' => json_encode($coursedetails),
+            'course_details_json' => json_encode(
+                $coursedetails,
+                JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_TAG
+            ),
             'selected_course_quizzes' => $selectedquizzes,
             'current_course_id' => $selectedcourse['id'],
         ];

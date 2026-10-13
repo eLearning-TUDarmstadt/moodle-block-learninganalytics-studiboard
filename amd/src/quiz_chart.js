@@ -2,7 +2,7 @@ define(['jquery', 'core/ajax'], function($, ajax) {
     "use strict";
 
     return {
-        init: function(courseDetailsJson, selectedCourseId) {
+        init: function() {
             console.log('[LA] Quiz Chart geladen');
 
             const select = document.getElementById('la-quiz-select');

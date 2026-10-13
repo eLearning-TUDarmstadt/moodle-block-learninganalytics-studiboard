@@ -133,13 +133,13 @@
   <!-- Kursdetails für JS (JSON, nicht escaped!) -->
   <script type="application/json" id="la-course-details">{{{course_details_json}}}</script>
 
-  {{#js}}
-  require(['block_learninganalytics/dashboard'], function(dashboard) {
-      dashboard.init();
-  });
-  require(['block_learninganalytics/quiz_chart'], function(chart) {
-      chart.init('{{{course_details_json}}}', {{current_course_id}});
-  });
-  {{/js}}
+{{#js}}
+require(['block_learninganalytics/dashboard'], function(dashboard) {
+    dashboard.init();
+});
+require(['block_learninganalytics/quiz_chart'], function(chart) {
+    chart.init();
+});
+{{/js}}
 
 </div>
